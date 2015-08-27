@@ -1,0 +1,185 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet snpr "snprintf ..."
+snprintf(${1:str}, ${2:sizeof(str)-1}, "${3:%s}"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$4${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet switch "switch case .." b
+switch(${1:arg}) {
+	case ${2:value}:
+		${3:doing something..}
+		break;
+
+	default:
+		${4:default doing..}
+		break;
+}${5}
+endsnippet
+
+snippet case "case break .." b
+case ${1:value}:
+	${2:doing something..}
+	break;${3}
+endsnippet
+
+snippet spr "sprintf ..."
+sprintf(${1:str}, "${2:%s}"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet fpr "fprintf ..."
+fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet fprintf "fprintf ..."
+fprintf(${1:stderr}, "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet pk "printk .. (printk)"
+printk(${1:%s} "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet printk "printk .. (printk)"
+printk(${1:%s} "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet
+
+snippet open "open .. (open)"
+open(${1:path}, ${2:O_CREAT|O_RDWR});${4}
+endsnippet
+
+snippet close "close .. (close)"
+close(${1:fd});${2}
+endsnippet
+
+snippet malloc "malloc .. (malloc)"
+${1:valuable} = (${2:typename})malloc(sizeof(${3:typename|valuable}));${4}
+endsnippet
+
+snippet memset "memset.. (memset)"
+memset(${1:valuable}, ${2:initialize}, sizeof(${3:typename}));
+endsnippet
+
+snippet read "read .. (read)"
+read(${1:fd}, ${2:buffer}, ${3:sizeof()});
+endsnippet
+
+snippet write "write .. (write)"
+write(${1:fd}, ${2:buffer}, ${3:sizeof()});
+endsnippet
+
+snippet strcpy"strcpy.. (strcpy)" i
+strcpy(${1:des}, ${2:src});${3}
+endsnippet
+
+snippet strncpy"strncpy.. (strncpy)" i
+strncpy(${1:des}, ${2:src}, ${3:len});${4}
+endsnippet
+
+snippet strcmp"!strcmp.. (strcmp)" i
+!strcmp(${1:str1}, ${2:str2});${3}
+endsnippet
+
+snippet strncmp"!strncmp.. (strncmp)" i
+!strncmp(${1:str1}, ${2:str2}, ${3:len});${4}
+endsnippet
+
+snippet itoa "itoa .. (itoa)" 
+itoa(${1:number}, ${2:str}, ${3:radix:2|8|10|16});
+endsnippet
+
+snippet atoi "atoi.. (atoi - int)"
+atoi(${1:const_char_ptr});
+endsnippet
+
+snippet atol "atol.. (atol - long)"
+atol(${1:const_char_ptr});
+endsnippet
+
+snippet atoll "atoll.. (atoll - long long)"
+atoll(${1:const_char_ptr});
+endsnippet
+
+snippet modread "module read - kernel" b
+// kernel module - read
+static ssize_t ${1:module_read}(struct file *file, char __user *buf, size_t count, loff_t *ppos){
+	${2}
+    if (copy_to_user(buf, (void*)${3:mem}, ${4:count})){/* user read operation*/
+        return -EFAULT;
+    }
+    return ${5:count};                              /* the count of had read */
+}
+endsnippet
+
+snippet modwrite "module write - kernel" b
+// kernel module - write
+static ssize_t ${1:module_write}(struct file *file, const char __user *buf, size_t count, loff_t *ppos){
+	${2}
+	if (copy_from_user(${3:mem}, buf, ${4:count})){ /* user write operation */
+        return -EFAULT;
+	}
+	return ${5:count};
+}
+endsnippet
+
+snippet modioctl "module ioctl - kernel" b
+// kernel module - ioctl
+static long s3c6410_pwm_ioctl(struct file *filep, unsigned int cmd, unsigned long arg){
+	${1}
+    switch ( cmd ) {
+        case ${2:START}:    
+            //start_func();
+            break;
+
+        case ${3:STOP}:    
+            //stop_func();
+            break;
+
+        default:    
+            break;
+    }                /* -----  end switch  ----- */
+
+    return ${4:0};
+}
+endsnippet
+
+snippet file_operations "file_operations - kernel" b
+// kernel moudule - file_operations
+static struct file_operations ${1:dev_fops} = {
+    .owner = ${2:THIS_MODULE},
+	.read = ${3:read_func},
+	.write = ${4:write_func},
+	.unlocked_ioctl = ${5:ioctl_func},
+};${6}
+endsnippet
+
+snippet miscdevice "miscdevice - kernel" b
+// kernel moudule - miscdevice
+static struct miscdevice ${1:misc} = {
+    .minor = ${2:MISC_DYNAMIC_MINOR},
+    .name = ${3:DEVICE_NAME},
+    .fops = ${4:&dev_fops},
+};${5}
+endsnippet
+
+snippet misc_register "misc_register - kernel" b
+misc_register(${1:&misc});${2}
+endsnippet
+
+snippet misc_deregister "misc_deregister - kernel" b
+misc_deregister(${1:&misc});${2}
+endsnippet
+
+snippet modinit "module .. (kernel module init/exit)"
+module_init(${1:init_func});
+module_exit(${2:exit_func});${3}
+endsnippet
+
+snippet modinfo "MODULE .. (kernel module information)"
+MODULE_AUTHOR("${1:linkscue}");
+MODULE_DESCRIPTION("${2:descriptions}");
+MODULE_ALIAS("${3:drivername}");
+MODULE_LICENSE("${4:GPL}");
+endsnippet
+
+# vim:ft=snippets:

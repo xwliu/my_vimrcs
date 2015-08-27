@@ -1,0 +1,16 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet usage "usage() .."
+def usage(exitval=0):
+    print "usage: %s -h ${1:opts}" %sys.argv[0]
+    print '''
+    -h\t--help\t\tprint this help docs
+	${2:optinfo}
+    '''
+    sys.exit(exitval)
+${3}
+endsnippet
+
+# vim:ft=snippets:

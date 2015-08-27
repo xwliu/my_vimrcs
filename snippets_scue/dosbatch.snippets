@@ -1,0 +1,13 @@
+snippet timestamp "get timestamp - date time" i
+for /f "tokens=1-4 delims=/ " %%a in ('echo %DATE%') do (set mydate=%%a-%%b-%%c)
+for /f "tokens=1-3 delims=/:" %%a in ('echo %TIME%') do (set mytime=%%a-%%b-%%c)
+set timestamp=%mydate%_%mytime%
+endsnippet
+
+snippet sleep "sleep with timeout" i
+timeout ${1:3}
+endsnippet
+
+snippet timeout "timeout (sleep..)" i
+timeout ${1:3}
+endsnippet

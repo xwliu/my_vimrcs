@@ -1,0 +1,221 @@
+###########################################################################
+#                            TextMate Snippets                            #
+###########################################################################
+
+snippet tmpcmd "tmpcmd .." 
+tmpcmd=/tmp/\$(basename \$0)_\$\$.txt
+endsnippet
+
+snippet self "self location.." 
+# self: get location
+self=\$(readlink -f \$0)
+self_dir=\$(dirname \$self)
+${1}
+endsnippet
+
+snippet help "--help" 
+# detect: help
+if [[ \${1} != "" ]]; then
+    case \${1} in
+        "-h" | "--help" | "-help" )
+            ${1:usage}
+            ;;
+    esac
+fi${2}
+endsnippet
+
+snippet usage "usage() .."
+# fun: usage
+usage(){
+    echo -en "\e[0;31m" # color: red
+	echo "==> Usage: \$(basename \$0) ${1:options}."
+	echo -en "\e[0m"
+    echo -en "\e[0;36m" # color: cyan
+    echo "==> Example: \$(basename \$0) ${2:options}"
+    echo "  --> Result: ${3:msg}."
+	echo -en "\e[0m"
+    exit
+}
+${4}
+endsnippet
+
+snippet msg "echo info err color.."
+# 输出信息
+info(){
+    echo -e "\e[0;32m==> ${@}\e[0m"
+}
+
+# 输出次级信息
+infosub(){
+    echo -e "\e[0;36m  --> ${@}\e[0m"
+}
+
+# 输出提示
+tip(){
+    echo -e "\e[0;35m==> ${@}\e[0m"
+}
+
+# 错误信息
+err(){
+    echo -e "\e[0;31m==> ${@}\e[0m"
+}
+
+# 次级错误信息
+errsub(){
+    echo -e "\e[0;31m  --> ${@}\e[0m"
+}${1}
+endsnippet
+
+snippet common "include common .."
+# 依赖于：common.sh
+
+# 引入common.sh
+[ -r ./common.sh ] &&\
+    source ./common.sh ||\
+    echo '==> 找不到依赖的common.sh文件'
+${1}
+endsnippet
+
+snippet info "info .." !b
+info "${1:info}"${2}
+endsnippet
+
+snippet infosub "info .." !b
+infosub "${1:infosub}"${2}
+endsnippet
+
+snippet tip "tip .." !b
+tip "${1:tip}"${2}
+endsnippet
+
+snippet err "err .." !b
+err "${1:err}"${2}
+endsnippet
+
+snippet errsub "errsub .." !b
+errsub "${1:errsub}"${2}
+endsnippet
+
+snippet echocolor "echo color.."
+# echo with color, start
+echoblack(){
+	echo -e "\e[0;30m${@}\e[0m"
+}
+echored(){
+	echo -e "\e[0;31m${@}\e[0m"
+}
+echogreen(){
+	echo -e "\e[0;32m${@}\e[0m"
+}
+echoyellow(){
+	echo -e "\e[0;33m${@}\e[0m"
+}
+echoblue(){
+	echo -e "\e[0;34m${@}\e[0m"
+}
+echopurple(){
+	echo -e "\e[0;35m${@}\e[0m"
+}
+echocyan(){
+	echo -e "\e[0;36m${@}\e[0m"
+}
+# echo with color, end
+endsnippet
+
+snippet select "select.." b
+select ${1:var} in ${2:array} 
+do
+	case $$1 in
+		${3:value1})
+			echo "you chose $$1 == $3"
+			;;
+		*)
+			echo "you chose a invalid value"
+			;;
+	esac
+done$4
+endsnippet
+
+snippet compgen "bash complete for a function" b
+function _${1:function}()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    COMPREPLY=( $(compgen -W "${2:complete_word_list}" -- ${cur}) )
+    return 0
+}
+complete -F _$1 $1
+${3}
+endsnippet
+
+snippet recentitems "remainning only recent 10 items of a directory" i
+# Remainning 10 items only
+busybox test -d ${1:"directory"} && {
+	busybox rm -rf $(busybox ls -1t $1/* | busybox tail -n +${2:11}) 
+}${3}
+endsnippet
+
+snippet timestamp "get timestamp" i
+timestamp=$(date +%F_%H-%M-%S)
+endsnippet
+
+snippet restart_adbd "function: restart adbd" b
+# 重启adbd
+# 目前重启Adbd只能打开 adbd over tcp，暂时无法打开USB的adbd
+restart_adbd(){
+	setprop ro.adb.secure 0
+	setprop ro.secure 0
+	setprop ro.debuggable 1
+	setprop ro.allow.mock.location 1
+	setprop service.adb.tcp.port 5555
+	setprop persist.sys.usb.config mtp,adb
+	setprop persist.service.adb.enable 1
+	stop adbd
+	sleep 3
+	start adbd
+}
+snippet array_from_read_line "get array from read line" b
+# get $2 from read line
+while read ${1:line}; do
+	${2:array}=( "$$1" "${$2[@]}" )
+done < <(${3:shell_command_line})
+# test array
+for $1 in "${$2[@]}" ; do
+	echo "$$1"
+done
+unset $1
+endsnippet
+
+snippet android_wait_bootcomp "android wait boot complete" b
+# android wait boot complete
+android_wait_bootcomp(){
+    adb wait-for-devices
+    while [[ "$(adb shell getprop init.svc.bootanim | tr -d '\011\012\015')" != "stopped" ]]; do
+        sleep 5
+    done
+}
+endsnippet
+
+snippet android_update_ota "android update ota zip" b
+# android ota update
+android_update_ota(){
+    local package_zip="\$1"
+    android_wait_bootcomp
+    sleep 10
+    adb shell "echo -e 'boot-recovery\n--update_package=${package_zip}' > /cache/recovery/command"
+    adb reboot recovery
+}
+endsnippet
+
+snippet android_dumpstate "android dumpstate" b
+# android dumpstate
+android_dumpstate(){
+    android_wait_bootcomp
+    adb shell 'dumpf=/sdcard/dumpstate-$(date +%F_%H-%M-%S); dumpstate -p -o $dumpf; busybox unix2dos ${dumpf}.txt; screencap -p ${dumpf}_cap.png ; busybox ls -1 ${dumpf}*; unset dumpf'
+}
+endsnippet
+
+# vim:ft=snippets:
