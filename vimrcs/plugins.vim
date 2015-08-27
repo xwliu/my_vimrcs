@@ -1,9 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins.vim
-" 主要包含了
-"   1. Vundle管理的插件
-"   2. Pathogen管理的插件
-"   3. 设定主题（依赖于Vundle）
+" 主要包含了使用Vundle管理的插件
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -27,7 +24,7 @@ Plugin 'vim-scripts/bash-support.vim'       "  bash插件
 Plugin 'vim-scripts/c.vim'                  "  C/C++插件
 " Plugin 'fholgado/minibufexpl.vim'
 " Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tpope/vim-pathogen'                 "  插件管理
+" Plugin 'tpope/vim-pathogen'                 "  插件管理
 Plugin 'vim-scripts/commentary.vim'         "  备注
 "Plugin 'vim-scripts/cscope.vim'
 Plugin 'vim-scripts/autoload_cscope.vim'    "  自动加载cs库
@@ -61,10 +58,13 @@ Plugin 'majutsushi/tagbar'                  "  大纲式TagList
 
 if has("gui_running")
     Plugin 'vim-scripts/vim-multiple-cursors'   "  多光标操作
+    Plugin 'https://github.com/scue/vim-eclim_wrapper.git' " eclim, for java
 endif
 
 if has("unix") || has("mac")
     Plugin 'Valloric/YouCompleteMe'         "  YouCompleteMe代码补全插件
+elseif has("win16") || has("win32")
+    Plugin 'https://github.com/scue/vim-ycm_win7.git' "  YouCompleteMe for win7 x86 & x64
 endif
 
 call vundle#end()            " required
@@ -72,16 +72,3 @@ filetype plugin indent on    " required
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "                       Vundle -- End
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-" => Load pathogen paths
-""""""""""""""""""""""""""""""
-if exists("g:loaded_pathogen") || &cp
-    call pathogen#infect('~/.vim_runtime/plugins/{}')
-    if has("win16") || has("win32")
-        " youcompleteme for windows:
-        "   https://bitbucket.org/Haroogan/vim-youcompleteme-for-windows/downloads
-        "  解压到 ~/.vim_runtime/plugins_win/<dir> 即可
-       call pathogen#infect('~/.vim_runtime/plugins_win/{}')
-    endif
-endif
