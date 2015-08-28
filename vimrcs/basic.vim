@@ -67,10 +67,6 @@ set pastetoggle=<F7>
 nnoremap <F8> :YRShow<CR>
 imap <F8> <C-O>:YRShow<CR>
 
-" ,+ ,- 分屏时快捷调整大小
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
-
 """"""""""""""""""""""""""""""
 " F2 移动到前一个缓冲区
 " F3 移动到下一个缓冲区
@@ -220,6 +216,11 @@ if ! has("gui_running")
     command W w !sudo tee % > /dev/null
 endif
 
+" ,+ ,- 分屏时快捷调整大小
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -282,7 +283,6 @@ set tm=500
 
 " Add a bit extra margin to the left
 set foldcolumn=1
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
