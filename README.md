@@ -1,5 +1,7 @@
 # VIM CONFIG
 
+![shot](/screenshot.png?raw=true "VIM Shot")
+
 ## INSTALL
 
 基本的可以使用这两行命令先安装
