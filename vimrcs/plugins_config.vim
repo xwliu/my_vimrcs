@@ -211,11 +211,13 @@ let g:ycm_filetype_blacklist = {}
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UniSnip
+" UltiSnips
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<leader>s"
 let g:UltiSnipsJumpForwardTrigger="<leader>n"
 let g:UltiSnipsJumpBackwardTrigger="<leader>b"
+let g:UltiSnipsSnippetsDir='~/.vim_runtime/snippets_scue'
+map <leader>e :exec ":UltiSnipsEdit ".expand(&filetype)<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
