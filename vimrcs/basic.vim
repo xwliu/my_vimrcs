@@ -63,27 +63,15 @@ nnoremap <F7> :set invpaste paste?<CR>o
 imap <F7> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F7>
 
-" F8 显示剪切板内容
-nnoremap <F8> :YRShow<CR>
-imap <F8> <C-O>:YRShow<CR>
-
 """"""""""""""""""""""""""""""
 " F2 移动到前一个缓冲区
 " F3 移动到下一个缓冲区
-" F4 打开NERDTree
-" F5 打开标签列表
-" ,t Tag往回跳转
-" ,g Tag往前跳转
 " F10 打开、关闭折叠代码
 """"""""""""""""""""""""""""""
 nnoremap <F2> :bprev<CR>
 imap <F2> <C-O>:bprev<CR>
 nnoremap <F3> :bnext<CR>
 imap <F3> <C-O>:bnext<CR>
-map <F4> :NERDTreeToggle <CR>
-nnoremap <F5> :TagbarToggle <CR>
-map <leader>t <C-t>
-map <leader>g <C-]>
 nnoremap <F10> zi              " for fold toggle
 
 " 快捷输入括号等

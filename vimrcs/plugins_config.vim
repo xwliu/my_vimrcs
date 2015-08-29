@@ -22,6 +22,9 @@ map <leader>f :MRU<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YankRing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" F8 显示剪切板内容
+nnoremap <F8> :YRShow<CR>
+imap <F8> <C-O>:YRShow<CR>
 if has("win16") || has("win32")
     " Don't do anything
 else
@@ -82,6 +85,7 @@ set grepprg=/bin/grep\ -nH
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F4> :NERDTreeToggle <CR>
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
@@ -135,6 +139,8 @@ if has('unix')
 endif
 map <C-F8> :!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q %:p<CR><Bar>
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q %:p:h<CR>
+map <leader>t <C-t>
+map <leader>g <C-]>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -190,6 +196,12 @@ if has("cscope")
     nmap <C-C>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
     nmap <C-C>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F5> :TagbarToggle <CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
