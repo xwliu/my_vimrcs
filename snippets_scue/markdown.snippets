@@ -44,4 +44,43 @@ snippet table "table for markdown" b
 | value1 | value2 | value3 |
 endsnippet
 
+snippet header_scue_github_io "Header for scue.github.io" b
+---
+layout: post
+title: "${1}"
+description: ""
+category: "${2:技术}"
+tags: [$3]
+---
+$4
+endsnippet
+
+snippet mh1 "header title 1" b
+#  ${1:header1}
+endsnippet
+
+snippet mh2 "header title 2" b
+## ${1:header2}
+endsnippet
+
+snippet mh3 "header title 3" b
+### ${1:header3}
+endsnippet
+
+snippet mh4 "header title 4" b
+####${1:header4}
+endsnippet
+
+snippet mh5 "header title 5" b
+#####${1:header5}
+endsnippet
+
+snippet mh6 "header title 6" b
+######${1:header6}
+endsnippet
+
+snippet mdl "link to" i
+[${1:link}](${2:http://url.com})$3
+endsnippet
+
 # vim:ft=snippets:
