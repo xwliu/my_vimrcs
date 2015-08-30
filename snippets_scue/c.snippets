@@ -44,6 +44,18 @@ snippet printk "printk .. (printk)"
 printk(${1:%s} "${2:%s}\n"${2/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$3${2/([^%]|%%)*(%.)?.*/(?2:\);)/}
 endsnippet
 
+snippet perror "perror" b
+perror("${1:string}");$2
+endsnippet
+
+snippet execl "execl a linux command" b
+// exec: $2
+int ${1:ret_execl};
+$1 = execl("${2:/path/to/program}", "${2/.*\///}", ${3:"arg1" "arg2 .."}, NULL);$4
+if ($1 == -1)
+	perror("execl");
+endsnippet
+
 snippet open "open .. (open)"
 open(${1:path}, ${2:O_CREAT|O_RDWR});${4}
 endsnippet
