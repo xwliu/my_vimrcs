@@ -56,6 +56,15 @@ if ($1 == -1)
 	perror("execl");
 endsnippet
 
+snippet execlp "execlp a linux command, search program with $PATH" b
+// exec: $2
+int ${1:ret_execlp};
+$1 = execlp("${2:program}", "$2", ${3:"arg1" "arg2 .."}, NULL);$4
+if ($1 == -1)
+	perror("execlp");
+endsnippet
+
+
 snippet open "open .. (open)"
 open(${1:path}, ${2:O_CREAT|O_RDWR});${4}
 endsnippet
