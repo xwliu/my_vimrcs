@@ -276,3 +276,8 @@ let g:snips_author = "scue"
 let g:snips_email = "scue@vip.qq.com"
 let g:snips_github = "github.com/scue"
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM SuperMan
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap K :SuperMan <cword><CR>
