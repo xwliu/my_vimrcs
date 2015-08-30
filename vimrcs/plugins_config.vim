@@ -134,10 +134,9 @@ let g:syntastic_python_checkers=['pyflakes']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('unix')
-    set tags+=~/.vim_runtime/stdtags
-endif
 map <C-F8> :!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q %:p<CR><Bar>
+" C-F9 had map to build & run
+map <C-F10> :!~/.vim_runtime/plugin_linux/ctags/ctags_with_deps.sh %:p<CR><Bar>
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q %:p:h<CR>
 map <leader>t <C-t>
 map <leader>g <C-]>
@@ -210,12 +209,12 @@ nnoremap <F5> :TagbarToggle <CR>
 let g:ycm_global_ycm_extra_conf='~/.vim_runtime/.ycm_extra_conf.py'
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
+let g:ycm_collect_identifiers_from_tags_files=1
 " C-O for go back
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>ji :YcmCompleter GoToImplementationElseDeclaration<CR>
 nmap <F6> :YcmDiags<CR>
 let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_key_invoke_completion = ''
 " java
 let g:EclimCompletionMethod = 'omnifunc'
 " for all
