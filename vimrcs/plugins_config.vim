@@ -22,6 +22,9 @@ map <leader>f :MRU<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => YankRing
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" F8 显示剪切板内容
+nnoremap <F8> :YRShow<CR>
+imap <F8> <C-O>:YRShow<CR>
 if has("win16") || has("win32")
     " Don't do anything
 else
@@ -40,7 +43,23 @@ map <leader>j :CtrlP<cr>
 map <c-b> :CtrlPBuffer<cr>
 
 let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
+
+" ctrlp忽略哪些文件
+let g:ctrlp_custom_ignore = {
+	\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+	\ 'file': '\v\.(exe|so|dll)$',
+	\ 'link': 'SOME_BAD_SYMBOLIC_LINKS',
+	\ }
+
+" ctrlp查找文件命令
+let g:ctrlp_user_command = {
+	\ 'types': {
+		\ 1: ['.git', 'cd %s && git ls-files'],
+		\ 2: ['.svn', 'cd %s && svn ls -R .'],
+		\ 3: ['.hg', 'hg --cwd %s locate -I .'],
+		\ },
+	\ 'fallback': 'find %s -type f'
+	\ }
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -67,6 +86,7 @@ set grepprg=/bin/grep\ -nH
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F4> :NERDTreeToggle <CR>
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark
 map <leader>nf :NERDTreeFind<cr>
@@ -115,11 +135,12 @@ let g:syntastic_python_checkers=['pyflakes']
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctags
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('unix')
-    set tags+=~/.vim_runtime/stdtags
-endif
 map <C-F8> :!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q %:p<CR><Bar>
+" C-F9 had map to build & run
+map <C-F10> :!~/.vim_runtime/plugin_linux/ctags/ctags_with_deps.sh %:p<CR><Bar>
 map <C-F12> :!ctags -R --c++-kinds=+p --fields=+ialS --extra=+q %:p:h<CR>
+map <leader>t <C-t>
+map <leader>g <C-]>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -178,17 +199,24 @@ endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <F5> :TagbarToggle <CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf='~/.vim_runtime/.ycm_extra_conf.py'
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_autoclose_preview_window_after_completion = 1
 " C-O for go back
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>ji :YcmCompleter GoToImplementationElseDeclaration<CR>
 nmap <F6> :YcmDiags<CR>
 let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_key_invoke_completion = ''
 " java
 let g:EclimCompletionMethod = 'omnifunc'
 " for all
@@ -196,11 +224,13 @@ let g:ycm_filetype_blacklist = {}
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UniSnip
+" UltiSnips
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<leader>s"
 let g:UltiSnipsJumpForwardTrigger="<leader>n"
 let g:UltiSnipsJumpBackwardTrigger="<leader>b"
+let g:UltiSnipsSnippetsDir='~/.vim_runtime/snippets_scue'
+map <leader>e :exec ":UltiSnipsEdit ".expand(&filetype)<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -248,3 +278,8 @@ let g:snips_author = "scue"
 let g:snips_email = "scue@vip.qq.com"
 let g:snips_github = "github.com/scue"
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM SuperMan
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap K :SuperMan <cword><CR>

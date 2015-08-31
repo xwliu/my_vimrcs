@@ -63,31 +63,15 @@ nnoremap <F7> :set invpaste paste?<CR>o
 imap <F7> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F7>
 
-" F8 显示剪切板内容
-nnoremap <F8> :YRShow<CR>
-imap <F8> <C-O>:YRShow<CR>
-
-" ,+ ,- 分屏时快捷调整大小
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
-
 """"""""""""""""""""""""""""""
 " F2 移动到前一个缓冲区
 " F3 移动到下一个缓冲区
-" F4 打开NERDTree
-" F5 打开标签列表
-" ,t Tag往回跳转
-" ,g Tag往前跳转
 " F10 打开、关闭折叠代码
 """"""""""""""""""""""""""""""
 nnoremap <F2> :bprev<CR>
 imap <F2> <C-O>:bprev<CR>
 nnoremap <F3> :bnext<CR>
 imap <F3> <C-O>:bnext<CR>
-map <F4> :NERDTreeToggle <CR>
-nnoremap <F5> :TagbarToggle <CR>
-map <leader>t <C-t>
-map <leader>g <C-]>
 nnoremap <F10> zi              " for fold toggle
 
 " 快捷输入括号等
@@ -220,6 +204,11 @@ if ! has("gui_running")
     command W w !sudo tee % > /dev/null
 endif
 
+" ,+ ,- 分屏时快捷调整大小
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+nnoremap <silent> <Leader>> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
+nnoremap <silent> <Leader>< :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -282,7 +271,6 @@ set tm=500
 
 " Add a bit extra margin to the left
 set foldcolumn=1
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -563,12 +551,6 @@ if has("gui_macvim")
     set fuoptions=maxvert,maxhorz
     au GUIEnter * set fullscreen
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Fast editing and reloading of vimrc configs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>e :e! ~/.vim_runtime/my_configs.vim<cr>
-autocmd! bufwritepost vimrc source ~/.vim_runtime/my_configs.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Turn persistent undo on
