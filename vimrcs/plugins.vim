@@ -55,11 +55,12 @@ Plugin 'amix/open_file_under_cursor.vim'    "  按'gf'打开光标下文件
 Plugin 'vim-scripts/fcitx.vim'              "  退出插入模式时自动切换成英文
 Plugin 'majutsushi/tagbar'                  "  大纲式TagList
 Plugin 'jez/vim-superman'                   "  Man帮助文档
+Plugin 's3rvac/AutoFenc'                    "  自动设定文件编码
 "Plugin 'bling/vim-bufferline'               "  显示Buffer
 
 if has("gui_running")
     Plugin 'vim-scripts/vim-multiple-cursors'   "  多光标操作
-    Plugin 'https://github.com/scue/vim-eclim_wrapper.git' " eclim, for java
+    " Plugin 'https://github.com/scue/vim-eclim_wrapper.git' " eclim, for java
 endif
 
 if has("unix") || has("mac")

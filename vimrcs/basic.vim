@@ -103,6 +103,12 @@ set mousemodel=popup
 set showcmd
 
 """"""""""""""""""""""""""""""
+" 自动切换工作目录
+""""""""""""""""""""""""""""""
+set autochdir
+set browsedir=current
+
+""""""""""""""""""""""""""""""
 " 中文段落不自动换行
 """"""""""""""""""""""""""""""
 set wrap nolinebreak nolist
