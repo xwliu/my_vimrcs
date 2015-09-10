@@ -218,4 +218,10 @@ android_dumpstate(){
 }
 endsnippet
 
+snippet android_update_ota_device "android update ota device" b
+mkdir -p /cache/recovery
+echo -e "boot-recovery\n--update_package=/mnt/sdcard/ota/" > /cache/recovery/command
+reboot recovery
+endsnippet
+
 # vim:ft=snippets:
