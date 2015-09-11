@@ -105,8 +105,8 @@ set showcmd
 """"""""""""""""""""""""""""""
 " 自动切换工作目录
 """"""""""""""""""""""""""""""
-set autochdir
-set browsedir=current
+" set autochdir
+" set browsedir=current
 
 """"""""""""""""""""""""""""""
 " 中文段落不自动换行
@@ -302,7 +302,12 @@ if has("gui_running")
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
+" 默认VIM内部编码是UTF8
 set encoding=utf8
+" 终端编码与encoding相同
+let &termencoding=&encoding 
+" 让VIM按以下顺序检索编码，若不设定则无法使用gbk编码
+set fileencodings=ucs-bom,utf-8,gbk,cp936,gb2312,default,latin1
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
