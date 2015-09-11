@@ -307,7 +307,7 @@ set encoding=utf8
 " 终端编码与encoding相同
 let &termencoding=&encoding 
 " 让VIM按以下顺序检索编码，若不设定则无法使用gbk编码
-set fileencodings=ucs-bom,utf-8,gbk,cp936,gb2312,default,latin1
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,gb2312,big5,gb18030,latin1
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
