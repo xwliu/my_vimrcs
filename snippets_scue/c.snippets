@@ -203,4 +203,16 @@ MODULE_ALIAS("${3:drivername}");
 MODULE_LICENSE("${4:GPL}");
 endsnippet
 
+snippet modify_by_scue "modify by scue" i
+/* BEGIN: Modified by scue, `date +%Y/%m/%d`   PN:${1:for xxx} */
+$2
+/* END:   Modified by scue, `date +%Y/%m/%d`   PN:$1 */
+endsnippet
+
+snippet add_by_scue "modify by scue" i
+/* BEGIN: Added by scue, `date +%Y/%m/%d`   PN:${1:for xxx} */
+$2
+/* END:   Added by scue, `date +%Y/%m/%d`   PN:$1 */
+endsnippet
+
 # vim:ft=snippets:

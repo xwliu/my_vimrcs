@@ -1,0 +1,126 @@
+snippet BUILD_SHARED_LIBRARY "Android.mk build share library" b
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := hello-jni
+LOCAL_SRC_FILES := hello-jni.c
+
+include $(BUILD_SHARED_LIBRARY)
+endsnippet
+
+snippet BUILD_STATIC_LIBRARY "Android.mk build static library" b
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_MODULE := foo
+LOCAL_SRC_FILES := foo/foo.c
+LOCAL_EXPORT_CFLAGS := -DFOO=1
+
+include $(BUILD_STATIC_LIBRARY)
+endsnippet
+
+snippet BUILD_PACKAGE "Android.mk build apk" b
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+# List of static libraries to include in the package
+# LOCAL_STATIC_JAVA_LIBRARIES := static-library
+
+# Build all java files in the java subdirectory
+LOCAL_SRC_FILES := $(call all-subdir-java-files)
+
+# Name of the APK to build
+LOCAL_PACKAGE_NAME := LocalPackage
+
+# be siged with the platform key
+# LOCAL_CERTIFICATE := platform
+
+# Tell it to build an APK
+include $(BUILD_PACKAGE)
+endsnippet
+
+snippet BUILD_PREBUILT "Android.mk build prebuilt apk" b
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+# Module name should match apk name to be installed.
+LOCAL_MODULE := LocalModuleName
+LOCAL_SRC_FILES := $(LOCAL_MODULE).apk
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_SUFFIX := $(COMMON_ANDROID_PACKAGE_SUFFIX)
+
+include $(BUILD_PREBUILT)
+endsnippet
+
+snippet BUILD_STATIC_JAVA_LIBRARY "Andrioid.mk build static java library" b
+LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+
+# Build all java files in the java subdirectory
+LOCAL_SRC_FILES := $(call all-subdir-java-files)
+
+# Any libraries that this library depends on
+LOCAL_JAVA_LIBRARIES := android.test.runner
+
+# The name of the jar file to create
+LOCAL_MODULE := sample
+
+# Build a static jar file.
+include $(BUILD_STATIC_JAVA_LIBRARY)
+endsnippet
+
+snippet BUILD_EXECUTABLE "Android.mk build executable binary" b
+LOCAL_PATH:= $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_SRC_FILES:= udp_recv.cpp
+
+LOCAL_SHARED_LIBRARIES := liblog libcutils libc
+
+# C++ files extenstion
+# LOCAL_CPP_EXTENSION := .cxx .cpp .cc
+
+# indicate that your code relies on specific C++ features
+# LOCAL_CPP_FEATURES := rtti exceptions
+
+# C include paths
+# LOCAL_C_INCLUDES := $(LOCAL_PATH)/
+
+# LOCAL_STATIC_LIBRARIES :=
+
+# LOCAL_SHARED_LIBRARIES :=
+
+# LOCAL_LDLIBS := -lz
+
+# CFLAGS
+LOCAL_CFLAGS +=
+
+# CXXFLAGS
+LOCAL_CXXFLAGS +=
+
+LOCAL_MODULE:= udp_recv
+
+# gdb debug cflag
+# LOCAL_CFLAGS += -g -O0 -D_DEBUG
+
+include $(BUILD_EXECUTABLE)
+endsnippet
+
+snippet android_mk_jni "Android.mk for JNI/NDK" i
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE    := ${1:hello-jni}
+LOCAL_SRC_FILES := ${2:hello-jni.c}
+
+include $(BUILD_SHARED_LIBRARY)
+endsnippet
+
+snippet ifneq "Android.mk ifneq" i
+ifneq ($(${1:MY_CONFIG_BAR}),)
+	${2:MY_SOURCES += bar.c}
+endif
+
+endsnippet
