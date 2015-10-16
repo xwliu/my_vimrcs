@@ -204,6 +204,9 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" Edit
+map <leader>be :edit <c-r>=expand("%:p:h")<cr>
+
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 if ! has("gui_running")

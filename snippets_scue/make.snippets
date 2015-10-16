@@ -74,7 +74,7 @@ snippet BUILD_EXECUTABLE "Android.mk build executable binary" b
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES:= udp_recv.cpp
+LOCAL_SRC_FILES:= $1.cpp
 
 LOCAL_SHARED_LIBRARIES := liblog libcutils libc
 
@@ -99,12 +99,29 @@ LOCAL_CFLAGS +=
 # CXXFLAGS
 LOCAL_CXXFLAGS +=
 
-LOCAL_MODULE:= udp_recv
+LOCAL_MODULE:= ${1:module_name}
 
 # gdb debug cflag
 # LOCAL_CFLAGS += -g -O0 -D_DEBUG
 
 include $(BUILD_EXECUTABLE)
+endsnippet
+
+snippet BUILD_MULTI_PREBUILT "build multi prebuilt binary or shell script" b
+LOCAL_PATH:= $(call my-dir)
+include $(CLEAR_VARS)
+
+LOCAL_PREBUILT_EXECUTABLES := set_vga_timing.sh reset_vga_timing.sh
+
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_MULTI_PREBUILT)
+endsnippet
+
+snippet build_infor_header "build info header" b
+#-------------------------------------------------------------------------------
+#  build:${1:something}
+#-------------------------------------------------------------------------------
 endsnippet
 
 snippet android_mk_jni "Android.mk for JNI/NDK" i
