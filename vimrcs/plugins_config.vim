@@ -284,3 +284,27 @@ let g:snips_github = "github.com/scue"
 " VIM SuperMan
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap K :SuperMan <cword><CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VIM Tab, Linux Kernel Format or Not
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <leader>lf :call LinuxFormatToggle()<cr>
+function! LinuxFormatToggle()
+    if &shiftwidth == 8
+        setlocal expandtab
+        setlocal smarttab
+        setlocal shiftwidth=4
+        setlocal tabstop=4
+        setlocal ai "Auto indent
+        setlocal si "Smart indent
+    else
+        setlocal tabstop=8
+        setlocal shiftwidth=8
+        setlocal softtabstop=8
+        setlocal textwidth=80
+        setlocal noexpandtab
+        setlocal cindent
+        setlocal cinoptions=:0,l1,t0,g0,(0
+    endif
+endfunction

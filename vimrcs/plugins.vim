@@ -57,6 +57,7 @@ Plugin 'majutsushi/tagbar'                  "  大纲式TagList
 Plugin 'jez/vim-superman'                   "  Man帮助文档
 Plugin 's3rvac/AutoFenc'                    "  自动设定文件编码
 "Plugin 'bling/vim-bufferline'               "  显示Buffer
+Plugin 'vivien/vim-linux-coding-style'      " Kernel Style
 
 if has("gui_running")
     Plugin 'vim-scripts/vim-multiple-cursors'   "  多光标操作
