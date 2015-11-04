@@ -98,7 +98,7 @@ strncpy(${1:des}, ${2:src}, ${3:len});${4}
 endsnippet
 
 snippet strcmp"!strcmp.. (strcmp)" i
-!strcmp(${1:str1}, ${2:str2});${3}
+!strcmp(${1:str1}, ${2:str2})${3}
 endsnippet
 
 snippet strncmp"!strncmp.. (strncmp)" i
@@ -213,6 +213,58 @@ snippet add_by_scue "modify by scue" i
 /* BEGIN: Added by scue, `date +%Y/%m/%d`   PN:${1:for xxx} */
 $2
 /* END:   Added by scue, `date +%Y/%m/%d`   PN:$1 */
+endsnippet
+
+snippet execcmd_getoneline "exec command and get one line result" b
+char *execcmd_getoneline(const char *cmd){
+	FILE *fp;
+	char *result = NULL;
+	char buffer[1024];
+	memset(buffer, 0, sizeof(buffer));
+
+	fp = popen(cmd, "r");
+	if (fp == NULL) {
+		printf("Failed to execute command '%s'\n", cmd);
+		return NULL;
+	}
+	if (fgets(buffer, sizeof(buffer), fp)) {
+		fclose(fp);
+		int len = strlen(buffer);
+		result = (char *)malloc(len);
+		strncpy(result, buffer, len-1);
+		result[len-1]=0;
+		return result;
+	}
+	return NULL;
+}
+endsnippet
+
+snippet execcmd "exec command and get all result" b
+char *execcmd(const char *cmd){
+	FILE *fp;
+	char *result = NULL;
+	size_t len = 0;
+	char buffer[1024];
+	memset(buffer, 0, sizeof(buffer));
+
+	fp = popen(cmd, "r");
+	if (fp == NULL) {
+		printf("Failed to execute command '%s'\n", cmd);
+		return NULL;
+	}
+	while( fgets(buffer, sizeof(buffer), fp) != NULL ) {
+		if (result){
+			result = (char *)realloc(result, sizeof(result) + len + 1);
+			strcat(result, buffer);
+		}
+		else{
+			result = (char *)malloc(len + 1);
+			strcpy(result, buffer);
+		}
+	}
+	fclose(fp);
+	return result;
+}
 endsnippet
 
 # vim:ft=snippets:

@@ -224,4 +224,8 @@ echo -e "boot-recovery\n--update_package=/mnt/sdcard/ota/" > /cache/recovery/com
 reboot recovery
 endsnippet
 
+snippet adbshelltr "adb shell tr the end" i
+| tr -d '\011\012\015'
+endsnippet
+
 # vim:ft=snippets:
