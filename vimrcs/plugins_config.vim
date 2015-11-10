@@ -283,8 +283,9 @@ let g:snips_github = "github.com/scue"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM SuperMan
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap K :SuperMan <cword><CR>
-
+" nnoremap K tabnew :SuperMan <cword><CR>
+" nnoremap K :!vman.sh <cword><CR><Bar>
+nnoremap K :!vim -c "SuperMan <cword>" -c ":set nonumber"<CR><Bar>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Tab, Linux Kernel Format or Not
