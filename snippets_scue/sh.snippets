@@ -228,4 +228,38 @@ snippet adbshelltr "adb shell tr the end" i
 | tr -d '\011\012\015'
 endsnippet
 
+snippet getopt "getopt short and long opts" b
+#-------------------------------------------------------------------------------
+# Getopt
+#-------------------------------------------------------------------------------
+TEMPOPTS=$(getopt \
+		-n 'program_name' \
+		-o vdo: \
+		--long verbose,debug,outfile:,debugfile: \
+		-- "$@")
+
+if [ $? != 0 ] ; then echo "getopt failed, terminating..." >&2 ; exit 1 ; fi
+
+eval set -- "$TEMPOPTS"
+
+VERBOSE=false
+DEBUG=false
+OUTFILE=
+DEBUGFILE=
+while true; do
+	case "\$1" in
+		-v | --verbose ) VERBOSE=true; shift ;;
+		-d | --debug )   DEBUG=true; shift ;;
+		-o | --outfile ) OUTFILE="\$2"; shift 2 ;;
+		--debugfile )    DEBUGFILE="\$2"; shift 2 ;;
+		-- ) shift; break ;;
+		* ) break ;;
+	esac
+done
+
+if [[ -n "$DEBUGFILE" ]]; then
+	echo "Debug output file: $DEBUGFILE"
+fi
+endsnippet
+
 # vim:ft=snippets:
