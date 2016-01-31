@@ -1,0 +1,20 @@
+snippet docker-compose "docker-compose.yml file template" b
+${1:name}:
+	restart: always
+	#build: .
+	image: ${2:imageName} 
+	hostname: $1
+	container_name: $1
+	environment:
+		- deverloper=linkscue
+	ports:
+		- "10000:8080" 
+	volumes:
+		- /path/to/xyz:/xyz
+	dns:
+		- 180.76.76.76
+		- 114.114.114.114
+	#command: bundle exec thin -p 3000
+	#links:
+	#	- service:alias
+endsnippet

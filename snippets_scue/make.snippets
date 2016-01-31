@@ -141,3 +141,7 @@ ifneq ($(${1:MY_CONFIG_BAR}),)
 endif
 
 endsnippet
+
+snippet gdb_flags "android gdb flags" b
+LOCAL_CFLAGS += -g -O0 -D_DEBUG
+endsnippet
