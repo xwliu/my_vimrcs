@@ -212,7 +212,7 @@ let g:ycm_global_ycm_extra_conf='~/.vim_runtime/.ycm_extra_conf.py'
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
 let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_completion = 0
 " C-O for go back
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>ji :YcmCompleter GoToImplementationElseDeclaration<CR>
@@ -285,7 +285,9 @@ let g:snips_github = "github.com/scue"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " nnoremap K tabnew :SuperMan <cword><CR>
 " nnoremap K :!vman.sh <cword><CR><Bar>
+if ! has("gui_running")
 nnoremap K :!vim -c "SuperMan <cword>" -c ":set nonumber"<CR><Bar>
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Tab, Linux Kernel Format or Not
