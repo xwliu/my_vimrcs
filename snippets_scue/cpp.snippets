@@ -1,0 +1,9 @@
+snippet extern_c "extern C" b
+#ifdef __cplusplus
+extern "C" {
+#endif
+${1}
+#ifdef __cplusplus
+}
+#endif
+endsnippet

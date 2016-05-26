@@ -8,20 +8,21 @@ endsnippet
 
 snippet switch "switch case .." b
 switch(${1:arg}) {
-	case ${2:value}:
-		${3:doing something..}
+	case ${2:value}:{
+		${3:/*doing something..*/}
 		break;
-
+	}
 	default:
-		${4:default doing..}
+		${4:/*default doing..*/}
 		break;
 }${5}
 endsnippet
 
 snippet case "case break .." b
-case ${1:value}:
+case ${1:value}:{
 	${2:doing something..}
 	break;${3}
+}
 endsnippet
 
 snippet spr "sprintf ..."
@@ -267,4 +268,76 @@ char *execcmd(const char *cmd){
 }
 endsnippet
 
+snippet useTime "get use time" b
+struct timespec tstart={0,0}, tend={0,0};
+clock_gettime(CLOCK_MONOTONIC, &tstart);
+// do something here
+clock_gettime(CLOCK_MONOTONIC, &tend);
+double useTime = ((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) - ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec);
+printf("finished in %0.6f s.\n", useTime);
+endsnippet
 # vim:ft=snippets:
+
+snippet mmap "mmap open" b
+//#include <sys/mman.h>
+//#include <sys/stat.h>
+${1:uint8_t} *${2:in}_map;
+struct stat $2_sb;
+if (fstat($2_fd, &$2_sb) < 0) {
+	perror("get $2_fd stat failed");
+	return 1;
+}
+$2_map = ($1 *)mmap(NULL, $2_sb.st_size, PROT_READ, MAP_PRIVATE, $2_fd, 0);
+if ($2_map == MAP_FAILED) {
+	perror("mmap $2_map failed");
+	return 1;
+}
+endsnippet
+
+snippet packed "pragma pack(n)" b
+#ifdef __GNUC__
+#define ATTR_PACKED __attribute__ ((__packed__))
+#else
+#define ATTR_PACKED
+#pragma pack(push)
+#pragma pack(1)
+#endif
+// structs defined in here
+#ifndef __GNUC__
+#pragma pack(pop)
+#endif
+
+#undef ATTR_PACKED
+endsnippet
+
+snippet str "typedef struct" b
+typedef struct _${1:name} {
+	$2
+} $1;
+endsnippet
+
+snippet strr "typedef struct ATTR_PACKED" b
+typedef struct ATTR_PACKED _${1:name} {
+	$2
+} $1;
+endsnippet
+
+snippet typedefst "typedef struct" b
+typedef struct _${1:name} {
+	$2
+} $1;
+endsnippet
+
+snippet munmap "munmap" b
+munmap(${1:in}_map, ${1:in}_sb.st_size);
+endsnippet
+
+snippet extern_c "extern C" b
+#ifdef __cplusplus
+extern "C" {
+#endif
+${1}
+#ifdef __cplusplus
+}
+#endif
+endsnippet
