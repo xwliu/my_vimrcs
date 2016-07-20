@@ -38,9 +38,9 @@ endif
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_max_files=0
 
-let g:ctrlp_map = '<c-f>'
-map <leader>j :CtrlP<cr>
-map <c-b> :CtrlPBuffer<cr>
+let g:ctrlp_map = '<c-F>'
+" map <leader>j :CtrlP<cr>
+" map <c-b> :CtrlPBuffer<cr>
 
 let g:ctrlp_max_height = 20
 
@@ -86,10 +86,12 @@ set grepprg=/bin/grep\ -nH
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F4> :NERDTreeToggle <CR>
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark
-map <leader>nf :NERDTreeFind<cr>
+" map <F4> :NERDTreeToggle <CR>
+" map <leader>nn :NERDTreeToggle<cr>
+" map <leader>nb :NERDTreeFromBookmark
+" map <leader>nf :NERDTreeFind<cr>
+
+map <F4> <plug>NERDTreeTabsToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -212,7 +214,7 @@ let g:ycm_global_ycm_extra_conf='~/.vim_runtime/.ycm_extra_conf.py'
 let g:ycm_error_symbol = '>>'
 let g:ycm_warning_symbol = '>*'
 let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_autoclose_preview_window_after_completion = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
 " C-O for go back
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <leader>ji :YcmCompleter GoToImplementationElseDeclaration<CR>
@@ -281,9 +283,10 @@ let g:snips_github = "github.com/scue"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VIM SuperMan
+" VIM Man
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nnoremap K tabnew :SuperMan <cword><CR>
+" nnoremap K :tabnew <CR><Bar> \
+"             \:SuperMan <cword><CR>
 " nnoremap K :!vman.sh <cword><CR><Bar>
 if ! has("gui_running")
 nnoremap K :!vim -c "SuperMan <cword>" -c ":set nonumber"<CR><Bar>

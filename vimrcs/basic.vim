@@ -20,8 +20,8 @@
 " => F1~F12快捷键
 """"""""""""""""""""""""""""""
 " F1 Help
-" map <F2>  :tabp <CR>
-" map <F3>  :tabn <CR>
+map <F2>  :tabp <CR>
+map <F3>  :tabn <CR>
 " map <F4>  :NERDTreeToggle <CR>
 " map <F5>  :TlistToggle <CR>
 " nmap <F6> :YcmDiags<CR>
@@ -68,11 +68,11 @@ set pastetoggle=<F7>
 " F3 移动到下一个缓冲区
 " F10 打开、关闭折叠代码
 """"""""""""""""""""""""""""""
-nnoremap <F2> :bprev<CR>
-imap <F2> <C-O>:bprev<CR>
-nnoremap <F3> :bnext<CR>
-imap <F3> <C-O>:bnext<CR>
-nnoremap <F10> zi              " for fold toggle
+" nnoremap <F2> :bprev<CR>
+" imap <F2> <C-O>:bprev<CR>
+" nnoremap <F3> :bnext<CR>
+" imap <F3> <C-O>:bnext<CR>
+" nnoremap <F10> zi              " for fold toggle
 
 " 快捷输入括号等
 " Map auto complete of (, ", ', [
