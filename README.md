@@ -6,10 +6,8 @@
 
 基本的可以使用这两行命令先安装
 
-    git clone git@github.com:scue/my_vimrcs.git ~/.vim_runtime
+    git clone https://github.com:scue/my_vimrcs.git ~/.vim_runtime
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-安装好了`vundle`之后，打开VIM后就可以使用`PluginInstall`来安装其他插件了
 
 
 ## Linux
@@ -37,6 +35,7 @@ Linux相对容易，只需要编辑一个配置文件即可
             source $VIMRUNTIME/menu.vim
             language messages zh_CN.utf-8
         endif
+打开VIM后就可以使用`PluginInstall`来安装其他插件了
 
 ## Windows
 
