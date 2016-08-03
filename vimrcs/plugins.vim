@@ -69,7 +69,8 @@ if has("gui_running")
 endif
 
 if has("unix") || has("mac")
-    Plugin 'Valloric/YouCompleteMe'         "  YouCompleteMe代码补全插件
+    Plugin 'OmniCppComplete' "补全
+    "Plugin 'Valloric/YouCompleteMe'         "  YouCompleteMe代码补全插件
 elseif has("win16") || has("win32")
     Plugin 'https://github.com/scue/vim-ycm_win7.git' "  YouCompleteMe for win7 x86 & x64
 endif
