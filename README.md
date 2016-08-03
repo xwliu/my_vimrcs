@@ -6,7 +6,7 @@
 
 基本的可以使用这两行命令先安装
 
-    git clone https://github.com:scue/my_vimrcs.git ~/.vim_runtime
+    git clone https://github.com/xwliu/my_vimrcs.git ~/.vim_runtime
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 
