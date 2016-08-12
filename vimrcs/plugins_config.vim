@@ -209,21 +209,29 @@ nnoremap <F5> :TagbarToggle <CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_global_ycm_extra_conf='~/.vim_runtime/.ycm_extra_conf.py'
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>*'
-let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_global_ycm_extra_conf='~/.vim_runtime/.ycm_extra_conf.py'
+"let g:ycm_error_symbol = '>>'
+"let g:ycm_warning_symbol = '>*'
+"let g:ycm_collect_identifiers_from_tags_files=1
+"let g:ycm_autoclose_preview_window_after_completion = 1
 " C-O for go back
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>ji :YcmCompleter GoToImplementationElseDeclaration<CR>
-nmap <F6> :YcmDiags<CR>
-let g:ycm_seed_identifiers_with_syntax = 1
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"nnoremap <leader>ji :YcmCompleter GoToImplementationElseDeclaration<CR>
+"nmap <F6> :YcmDiags<CR>
+"let g:ycm_seed_identifiers_with_syntax = 1
 " java
-let g:EclimCompletionMethod = 'omnifunc'
+"let g:EclimCompletionMethod = 'omnifunc'
 " for all
-let g:ycm_filetype_blacklist = {}
+"let g:ycm_filetype_blacklist = {}
+
+
+"--------------------------------------------------------------------------------
+" SuperTab :SuperTabHelp
+"--------------------------------------------------------------------------------
+let g:SuperTabRetainCompletionType = 2
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType="context" 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
